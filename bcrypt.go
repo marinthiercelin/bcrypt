@@ -174,6 +174,7 @@ func HashBytes(password []byte, salt ...[]byte) (hash []byte, err error) {
 	copy(password_term, password)
 
 	hashed := crypt_raw(password_term, saltb[:SaltLen], rounds)
+	clear(password_term)
 	return build_bcrypt_str(minor, rounds, string(salt_bytes), hashed[:len(bf_crypt_ciphertext)*4-1]), nil
 }
 
@@ -187,4 +188,10 @@ func MatchBytes(password []byte, hash []byte) bool {
 		return false
 	}
 	return subtle.ConstantTimeCompare(h, hash) == 1
+}
+
+func clear(w []byte) {
+	for k := range w {
+		w[k] = 0
+	}
 }
