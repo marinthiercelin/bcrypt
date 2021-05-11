@@ -132,7 +132,7 @@ func HashBytes(password []byte, salt ...[]byte) (hash []byte, err error) {
 
 	if !consume(sr, '$') {
 		minor, _ = sr.ReadByte()
-		if minor != 'a' || !consume(sr, '$') {
+		if (minor != 'a' && minor != 'y') || !consume(sr, '$') {
 			return nil, InvalidSalt
 		}
 	}
