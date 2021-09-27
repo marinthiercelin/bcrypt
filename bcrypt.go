@@ -6,6 +6,7 @@ import (
 	"crypto/subtle"
 	"encoding/base64"
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -108,6 +109,7 @@ func Hash(password string, salt ...string) (ps string, err error) {
 }
 
 func HashBytes(password []byte, salt ...[]byte) (hash []byte, err error) {
+	fmt.Println("DEBUG : This is a fork of bcrypt")
 	var s []byte
 
 	if len(salt) == 0 {
